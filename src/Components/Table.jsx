@@ -11,14 +11,14 @@ import axios from 'axios';
 const Table = ({ heading }) => {
     // State to track which table row is currently selected (-1 means no selection)
     const [selectedIndex, setSelectedIndex] = useState(-1);
-    
+
     // State to store the list of items/posts fetched from the API
     const [items, setItems] = useState([]);
 
     // useEffect hook runs when component mounts to fetch data from API
     useEffect(() => {
         // Async function to fetch posts from JSONPlaceholder API
-        const fetchData = async() => {
+        const fetchData = async () => {
             try {
                 const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
                 setItems(response.data) // Update state with fetched data
@@ -38,7 +38,7 @@ const Table = ({ heading }) => {
         <>
             {/* Table heading */}
             <h2 className='text-2xl font-bold text-red-600'>{heading}</h2>
-            
+
             {/* Table container with responsive overflow handling */}
             <div className="relative overflow-x-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -50,7 +50,7 @@ const Table = ({ heading }) => {
                             </th>
                         </tr>
                     </thead>
-                    
+
                     {/* Table body */}
                     <tbody>
                         {
@@ -58,15 +58,15 @@ const Table = ({ heading }) => {
                             items.length > 0 ? (
                                 // Map through items to create table rows
                                 items.map((item, index) => (
-                                    <tr 
-                                        key={item.id} 
+                                    <tr
+                                        key={item.id}
                                         className={`
                                             ${index === selectedIndex ? "bg-gray-600" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}
                                         `}
                                     >
-                                        <th 
-                                            scope="row" 
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer" 
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
                                             onClick={() => handleClick(index)}
                                         >
                                             {item.title}
